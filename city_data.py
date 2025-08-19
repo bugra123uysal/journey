@@ -1,38 +1,8 @@
 import requests  #apilere istek göndermek 
 import pandas as pd
-cou=["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
-    "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas",
-    "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin",
-    "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei",
-    "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon",
-    "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia",
-    "Comoros", "Costa Rica", "Croatia", "Cuba",
-    "Cyprus", "Czech Republic", "Democratic Republic of the Congo", "Denmark",
-    "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
-    "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji",
-    "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",
-    "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti",
-    "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq",
-    "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan",
-    "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
-    "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania",
-    "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta",
-    "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
-    "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique",
-    "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand",
-    "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway",
-    "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea",
-    "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania",
-    "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia",
-    "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe",
-    "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
-    "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa",
-    "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname",
-    "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand",
-    "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
-    "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates",
-    "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu",
-    "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"]
+import matplotlib.pyplot as plt
+import seaborn as sns
+cou=['Aruba', 'Afghanistan', 'Angola', 'Anguilla', 'Åland Islands', 'Albania', 'Andorra', 'United Arab Emirates', 'Argentina', 'Armenia', 'American Samoa', 'Antarctica', 'French Southern Territories', 'Antigua and Barbuda', 'Australia', 'Austria', 'Azerbaijan', 'Burundi', 'Belgium', 'Benin', 'Bonaire, Sint Eustatius and Saba', 'Burkina Faso', 'Bangladesh', 'Bulgaria', 'Bahrain', 'Bahamas', 'Bosnia and Herzegovina', 'Saint Barthélemy', 'Belarus', 'Belize', 'Bermuda', 'Bolivia, Plurinational State of', 'Brazil', 'Barbados', 'Brunei Darussalam', 'Bhutan', 'Bouvet Island', 'Botswana', 'Central African Republic', 'Canada', 'Cocos (Keeling) Islands', 'Switzerland', 'Chile', 'China', "Côte d'Ivoire", 'Cameroon', 'Congo, The Democratic Republic of the', 'Congo', 'Cook Islands', 'Colombia', 'Comoros', 'Cabo Verde', 'Costa Rica', 'Cuba', 'Curaçao', 'Christmas Island', 'Cayman Islands', 'Cyprus', 'Czechia', 'Germany', 'Djibouti', 'Dominica', 'Denmark', 'Dominican Republic', 'Algeria', 'Ecuador', 'Egypt', 'Eritrea', 'Western Sahara', 'Spain', 'Estonia', 'Ethiopia', 'Finland', 'Fiji', 'Falkland Islands (Malvinas)', 'France', 'Faroe Islands', 'Micronesia, Federated States of', 'Gabon', 'United Kingdom', 'Georgia', 'Guernsey', 'Ghana', 'Gibraltar', 'Guinea', 'Guadeloupe', 'Gambia', 'Guinea-Bissau', 'Equatorial Guinea', 'Greece', 'Grenada', 'Greenland', 'Guatemala', 'French Guiana', 'Guam', 'Guyana', 'Hong Kong', 'Heard Island and McDonald Islands', 'Honduras', 'Croatia', 'Haiti', 'Hungary', 'Indonesia', 'Isle of Man', 'India', 'British Indian Ocean Territory', 'Ireland', 'Iran, Islamic Republic of', 'Iraq', 'Iceland', 'Israel', 'Italy', 'Jamaica', 'Jersey', 'Jordan', 'Japan', 'Kazakhstan', 'Kenya', 'Kyrgyzstan', 'Cambodia', 'Kiribati', 'Saint Kitts and Nevis', 'Korea, Republic of', 'Kuwait', "Lao People's Democratic Republic", 'Lebanon', 'Liberia', 'Libya', 'Saint Lucia', 'Liechtenstein', 'Sri Lanka', 'Lesotho', 'Lithuania', 'Luxembourg', 'Latvia', 'Macao', 'Saint Martin (French part)', 'Morocco', 'Monaco', 'Moldova, Republic of', 'Madagascar', 'Maldives', 'Mexico', 'Marshall Islands', 'North Macedonia', 'Mali', 'Malta', 'Myanmar', 'Montenegro', 'Mongolia', 'Northern Mariana Islands', 'Mozambique', 'Mauritania', 'Montserrat', 'Martinique', 'Mauritius', 'Malawi', 'Malaysia', 'Mayotte', 'Namibia', 'New Caledonia', 'Niger', 'Norfolk Island', 'Nigeria', 'Nicaragua', 'Niue', 'Netherlands', 'Norway', 'Nepal', 'Nauru', 'New Zealand', 'Oman', 'Pakistan', 'Panama', 'Pitcairn', 'Peru', 'Philippines', 'Palau', 'Papua New Guinea', 'Poland', 'Puerto Rico', "Korea, Democratic People's Republic of", 'Portugal', 'Paraguay', 'Palestine, State of', 'French Polynesia', 'Qatar', 'Réunion', 'Romania', 'Russian Federation', 'Rwanda', 'Saudi Arabia', 'Sudan', 'Senegal', 'Singapore', 'South Georgia and the South Sandwich Islands', 'Saint Helena, Ascension and Tristan da Cunha', 'Svalbard and Jan Mayen', 'Solomon Islands', 'Sierra Leone', 'El Salvador', 'San Marino', 'Somalia', 'Saint Pierre and Miquelon', 'Serbia', 'South Sudan', 'Sao Tome and Principe', 'Suriname', 'Slovakia', 'Slovenia', 'Sweden', 'Eswatini', 'Sint Maarten (Dutch part)', 'Seychelles', 'Syrian Arab Republic', 'Turks and Caicos Islands', 'Chad', 'Togo', 'Thailand', 'Tajikistan', 'Tokelau', 'Turkmenistan', 'Timor-Leste', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Türkiye', 'Tuvalu', 'Taiwan, Province of China', 'Tanzania, United Republic of', 'Uganda', 'Ukraine', 'United States Minor Outlying Islands', 'Uruguay', 'United States', 'Uzbekistan', 'Holy See (Vatican City State)', 'Saint Vincent and the Grenadines', 'Venezuela, Bolivarian Republic of', 'Virgin Islands, British', 'Virgin Islands, U.S.', 'Viet Nam', 'Vanuatu', 'Wallis and Futuna', 'Samoa', 'Yemen', 'South Africa', 'Zambia', 'Zimbabwe']
 
 ecl=[]
 for country in cou:
@@ -55,6 +25,8 @@ for country in cou:
       Saat_dilimi=data[0]["timezones"]
       Trafik_yönü=data[0]["car"]["side"]
       Diller=data[0]["languages"]
+      alan=data[0]["area"]
+      bm=data[0]['unMember']
     
     
       ecl.append({"ülke": ülke ,
@@ -62,10 +34,13 @@ for country in cou:
                   "Nüfus":Nüfus ,
                   "Para birimi":Para_birimi,
                   "Bölge" :Bölge   ,
-                  "Saat_dilimi":Saat_dilimi,
+                  "Saat_dilimi":Saat_dilimi,             
+                  "bm":bm,
                   "Trafik_yönü": Trafik_yönü,
                   "Diller":Diller,
+                  "Alan":alan,
                   "Konum": Konum 
+                  
                   
                    })
    
@@ -74,6 +49,57 @@ for country in cou:
 cuty=pd.DataFrame(ecl)
 
 cuty.to_excel("C:\\Users\\buğra\\Desktop\\journee.xlsx", index=True)
-  
-  
 
+ge=pd.read_excel("C:\\Users\\buğra\\Desktop\\journee.xlsx")
+# hatalı eksik verilerin sayısnı verir
+print(ge.isnull().sum())
+# nufus yoğunluğu 
+ge['nufus_yoğunlu']=ge['Nüfus'] / ge['Alan']
+
+# trafik yönü 
+sayısı=ge['Trafik_yönü'].value_counts().reset_index().head(20)
+sayısı.columns=['adet', 'trafik_yonu']
+sns.barplot(x="adet", y="trafik_yonu", data=sayısı)
+plt.title("Ülkelerin Trafik Yönü Dağılımı")
+plt.xlabel("Ülke Sayısı")
+plt.ylabel("Trafik Yönü")
+plt.show()
+  
+# bölge deki ülke sayıları 
+bölsayı=ge['Bölge'].value_counts().reset_index().head(20)
+bölsayı.columns=["sayı","Bölge"]
+sns.barplot(y="Bölge" , x="sayı",data=bölsayı)
+plt.title("Bölgelere Göre Ülke Sayısı")
+plt.xlabel("Ülke Sayısı")
+plt.ylabel("Bölge")
+plt.show()
+
+# bm de olan ve olmayan  ülke sayısı
+Bmsay=ge['bm'].value_counts().reset_index().head(20)
+Bmsay.columns=["sayı","bm"]
+sns.barplot(y="bm",x="sayı",data=Bmsay)
+plt.title("BM Üyeliğine Göre Ülke Sayısı")
+plt.xlabel("Ülke Sayısı")
+plt.ylabel("BM Üyesi / Değil")
+plt.show()
+
+# para birimini kullanan ülke sayıları
+
+parabr=ge['Para birimi'].value_counts().reset_index().head(20)
+parabr.columns=["adet","birim"]
+sns.barplot(y="birim", x="adet", data=parabr)
+plt.title("En Çok Kullanılan Para Birimleri (İlk 20)")
+plt.xlabel("Ülke Sayısı")
+plt.ylabel("Para Birimi")
+plt.xticks(rotation=90)
+plt.show()
+
+# dillerin kullanım sayıları 
+dill=ge['Diller'].value_counts().reset_index().head(20)
+dill.columns=["adet","dil"]
+sns.barplot(y="dil",x="adet", data=dill)
+plt.title("En Çok Kullanılan Diller (İlk 20)")
+plt.xlabel("Ülke Sayısı")
+plt.ylabel("Dil")
+plt.xticks(rotation=90)
+plt.show()
