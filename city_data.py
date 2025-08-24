@@ -74,7 +74,7 @@ def get_countr_data(country, xml_root):
   
 countries=[c.name for c in pycountry.countries]
 # döviz fiyatları api
-ddöv=f"https://www.tcmb.gov.tr/kurlar/today.xml"
+ddöv=f"https://www.tcmb.gov.tr/kurlar/today.xml" 
 respon=requests.get(ddöv)
 respon.encoding= "utf-8"
 root=ET.fromstring(respon.text)
@@ -91,18 +91,26 @@ for country in countries:
 
 cuty=pd.DataFrame(ecl)
 
-cuty.to_excel("C:\\Users\\buğra\\Desktop\\journee.xlsx", index=True)
 
-ge=pd.read_excel("C:\\Users\\buğra\\Desktop\\journee.xlsx")
+
+
 # hatalı eksik verilerin sayısnı verir
-print(ge.isnull().sum())
 
+cuty['Başkent']=cuty['Başkent'].fillna('unknow')
+cuty['Para_birimi']=cuty['Para_birimi'].fillna('unknow')
+cuty['Diller']=cuty['Diller'].fillna('unknow')
+cuty['alan']=cuty['alan'].astype(float)
+cuty['Nüfus']=cuty['Nüfus'].astype(int)
+ # nufus yoğunluğu 
+cuty["nufus_yogunlu"]=cuty["Nüfus"] / cuty["alan"]
+cuty["kışıbaşı_alan"]=cuty["alan"]/ cuty["Nüfus"]
 
-# nufus yoğunluğu 
-ge['nufus_yoğunlu']=ge['Nüfus'] / ge['alan']
-
+cuty.to_excel("C:\\Users\\buğra\\Desktop\\journee.xlsx", index=True)
+print(cuty.columns)
+print(cuty.isnull().sum())
+"""  
 # trafik yönü 
-sayısı=ge['Trafik_yönü'].value_counts().reset_index().head(20)
+sayısı=cuty['Trafik_yönü'].value_counts().reset_index().head(20)
 sayısı.columns=['adet', 'trafik_yonu']
 sns.barplot(x="adet", y="trafik_yonu", data=sayısı)
 plt.title("Ülkelerin Trafik Yönü Dağılımı")
@@ -111,7 +119,7 @@ plt.ylabel("Trafik Yönü")
 plt.show()
   
 # bölge deki ülke sayıları 
-bölsayı=ge['Bölge'].value_counts().reset_index().head(20)
+bölsayı=cuty['Bölge'].value_counts().reset_index().head(20)
 bölsayı.columns=["sayı","Bölge"]
 sns.barplot(y="Bölge" , x="sayı",data=bölsayı)
 plt.title("Bölgelere Göre Ülke Sayısı")
@@ -120,7 +128,7 @@ plt.ylabel("Bölge")
 plt.show()
 
 # bm de olan ve olmayan  ülke sayısı
-Bmsay=ge['bm'].value_counts().reset_index().head(20)
+Bmsay=cuty['bm'].value_counts().reset_index().head(20)
 Bmsay.columns=["sayı","bm"]
 sns.barplot(y="bm",x="sayı",data=Bmsay)
 plt.title("BM Üyeliğine Göre Ülke Sayısı")
@@ -130,7 +138,7 @@ plt.show()
 
 # para birimini kullanan ülke sayıları
 
-parabr=ge['Para_birimi'].value_counts().reset_index().head(20)
+parabr=cuty['Para_birimi'].value_counts().reset_index().head(20)
 parabr.columns=["adet","birim"]
 sns.barplot(y="birim", x="adet", data=parabr)
 plt.title("En Çok Kullanılan Para Birimleri (İlk 20)")
@@ -140,11 +148,14 @@ plt.xticks(rotation=90)
 plt.show()
 
 # dillerin kullanım sayıları 
-dill=ge['Diller'].value_counts().reset_index().head(20)
-dill.columns=["adet","dil"]
-sns.barplot(y="dil",x="adet", data=dill)
+cuty_explore=cuty.explode('Diller')
+dill=cuty_explore['Diller'].value_counts().reset_index().head(20)
+dill.columns=["dil", "adet"]
+sns.barplot(x="adet", y="dil", data=dill)
 plt.title("En Çok Kullanılan Diller (İlk 20)")
 plt.xlabel("Ülke Sayısı")
 plt.ylabel("Dil")
 plt.xticks(rotation=90)
 plt.show()
+
+"""
