@@ -1,17 +1,30 @@
-Bu proje, RestCountries API ve TCMB XML verilerini kullanarak ülkeler hakkında veri çekiyor. 
-Elde edilen veriler arasında nüfus, başkent, para birimi, döviz fiyatı, bölge, diller gibi bilgiler bulunuyor. 
-Sonrasında pandas, seaborn ve matplotlib kullanılarak görselleştirme yapılıyor.
+Journey Project
+Description
 
-## Kullanılan Teknolojiler:
-- Python (requests, pandas, matplotlib, seaborn, pycountry)
-- RestCountries API
-- TCMB Kurlar XML
+With this project, I collected various information about countries using the RestCountries API and TCMB XML data and visualized it.
 
-## Özellikler:
-- Ülkeler için temel bilgiler (nüfus, başkent, para birimi, Saat_dilimi,alan , Diller, konum , Trafik_yönü )
-- Döviz kuru entegrasyonu
-- Grafiksel analiz (bölgelere göre ülke sayısı, BM üyeliği, para birimi dağılımı)
-- Excel'e veri kaydetme
+Technologies Used
 
-## Geliştirme Notları:
-- Kod yapısı fonksiyonlara bölünerek daha okunabilir hale getirmeyi deneyimledim.
+Python: requests, pandas, matplotlib, seaborn, pycountry
+
+APIs: RestCountries API
+
+Data Source: TCMB Exchange Rates XML
+
+What I Did
+
+I retrieved basic information for countries: population, capital, currency, timezone, area, languages, location, and traffic direction.
+
+I integrated exchange rate data.
+
+I created graphical analyses:
+
+Examined the number of countries per region
+
+Visualized UN membership status
+
+Analyzed currency distribution
+
+I saved the data in Excel format.
+
+I performed various data cleaning and transformation tasks.
